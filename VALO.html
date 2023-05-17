@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div id="myImage" onmousemove="changeCursor(event)" onclick="performAction(event)">
+    <img src="D:\Session Alexandre\Pictures\IMAGE VALO\VALO\CV VALORANT 2.png" alt="Image 1" id="mainImage">
+    <img src="D:\Session Alexandre\Pictures\IMAGE VALO\VALO\CV VALORANT 3.png" alt="Image 2" id="image2" style="display: none;">
+    <img src="D:\Session Alexandre\Pictures\IMAGE VALO\VALO\CV VALORANT 4.png" alt="Image 3" id="image3" style="display: none;">
+    <img src="D:\Session Alexandre\Pictures\IMAGE VALO\VALO\CV VALORANT 5.png" alt="Image 4" id="image4" style="display: none;">
+    <img src="D:\Session Alexandre\Pictures\IMAGE VALO\VALO\CV VALORANT 6.png" alt="Image 5" id="image5" style="display: none;">
+    <div id="emailZone" onmouseover="changeCursor(event)" onmouseout="resetCursor()" onclick="sendEmail()">Zone d'envoi d'e-mail</div>
+    <div id="linkZone" onmouseover="changeCursor(event)" onmouseout="resetCursor()" onclick="redirectToLink()">Zone de redirection</div>
+  </div>
+
+  <script>
+    var imageIndex = 1; // Index de l'image actuelle
+
+    function changeCursor(event) {
+      var x = event.clientX - event.target.offsetLeft;
+      var y = event.clientY - event.target.offsetTop;
+
+      if (checkCoordinates(x, y, 7592, 8109, 1613, 2175) ||
+          checkCoordinates(x, y, 8112, 8643, 1613, 2175) ||
+          checkCoordinates(x, y, 8651, 9169, 1613, 2175) ||
+          checkCoordinates(x, y, 9180, 9698, 1613, 2175) ||
+          checkCoordinates(x, y, 7048, 7590, 1613, 2175) ||
+          checkCoordinates(x, y, 3552, 4881, 3840, 4165) ||
+          checkCoordinates(x, y, 5089, 6434, 3840, 4165)) {
+        document.getElementById("myImage").style.cursor = "pointer";
+      } else {
+        document.getElementById("myImage").style.cursor = "default";
+      }
+    }
+
+    function resetCursor() {
+      document.getElementById("myImage").style.cursor = "default";
+    }
+
+    function performAction(event) {
+      var x = event.clientX - event.target.offsetLeft;
+      var y = event.clientY - event.target.offsetTop;
+
+      if (checkCoordinates(x, y, 7592, 8109, 1613, 2175)) {
+        imageIndex = 2; // Changer l'index de l'image pour afficher la deuxième image
+      } else if (checkCoordinates(x, y, 8112, 8643, 1613, 2175)) {
+        imageIndex = 3; // Changer l'index de l'image pour afficher la troisième image
+      } else if (checkCoordinates(x, y, 8651, 9169, 1613, 2175)) {
+        imageIndex = 4; // Changer l'index de l'image pour afficher la quatrième image
+      } else if (checkCoordinates(x, y, 9180, 9698, 1613, 2175)) {
+        imageIndex = 5; // Changer l'index de l'image pour afficher la cinquième image
+      } else if (checkCoordinates(x, y, 7048, 7590, 1613, 2175)) {
+        imageIndex = 1; // Revenir à l'index de l'image par défaut
+      }
+      // Ajoutez vos actions spécifiques ici pour les nouvelles zones
+      else if (checkCoordinates(x, y, 3552, 4881, 3840, 4165)) {
+        sendEmail();
+      } else if (checkCoordinates(x, y, 5089, 6434, 3840, 4165)) {
+        redirectToLink();
+      }
+
+      var mainImage = document.getElementById("mainImage");
+      var images = document.querySelectorAll("#myImage > img");
+
+      for (var i = 0; i < images.length; i++) {
+        if (i + 1 === imageIndex) {
+          images[i].style.display = "block";
+          images[i].alt = "Image " + imageIndex;
+        } else {
+          images[i].style.display = "none";
+        }
+      }
+    }
+
+    function checkCoordinates(x, y, xMin, xMax, yMin, yMax) {
+      return x >= xMin && x <= xMax && y >= yMin && y <= yMax;
+    }
+
+    function sendEmail() {
+      // Remplacez "votre@adresse.email" par votre adresse e-mail
+      window.location.href = "mailto:alexandretaguigue@gmail.coml";
+    }
+
+   function redirectToLink() {
+  // Remplacez "https://www.lien-de-redirection.com" par le lien souhaité
+  window.open("file:///D:/Session%20Alexandre/Downloads/TAGUIGUE%20ALEXANDRE%20CV.pdf", "_blank");
+}
+  </script>
+</body>
+</html>
